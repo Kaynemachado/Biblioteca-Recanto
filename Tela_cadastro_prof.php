@@ -27,38 +27,46 @@ if (isset($_POST['Enviar'])) { // Verifica se a variável foi iniciada (botão p
   $username =  $_POST['username'];
   $senha =  $_POST['senha'];
 
+  if($_FILES["foto"]["tmp_name"] != ''){
 
-  $pasta_uploads = "arquivos/";
-  $extensao = strtolower(pathinfo(basename($_FILES["foto"]["name"]),PATHINFO_EXTENSION));
-  $arquivo_final = $pasta_uploads . time() . $username . '.'. $extensao;
-  $uploadOk = 1;
-
-  $check = getimagesize($_FILES["foto"]["tmp_name"]);
-
-  if($check == false) {
-    $uploadOk = 0;
-  }
-  if (file_exists($arquivo_final)) {
-    $uploadOk = 0;
-  }
-  if ($_FILES["foto"]["size"] > 500000) {
-    $uploadOk = 0;
-  }
-
-  if($uploadOk == 0){
-    echo "<script> alert('Ocorreu algum erro.') </script>";
-    exit;
-  }else{
-    if (!move_uploaded_file($_FILES["foto"]["tmp_name"], $arquivo_final)) {
+      $pasta_uploads = "arquivos/";
+      $extensao = strtolower(pathinfo(basename($_FILES["foto"]["name"]),PATHINFO_EXTENSION));
+      $arquivo_final = $pasta_uploads . time() . $username . '.'. $extensao;
+      $uploadOk = 1;
+    
+      $check = getimagesize($_FILES["foto"]["tmp_name"]);
+    
+      if($check == false) {
+        $uploadOk = 0;
+      }
+      if (file_exists($arquivo_final)) {
+        $uploadOk = 0;
+      }
+      if ($_FILES["foto"]["size"] > 500000) {
+        $uploadOk = 0;
+      }
+    
+      if($uploadOk == 0){
         echo "<script> alert('Ocorreu algum erro.') </script>";
         exit;
+      }else{
+        if (!move_uploaded_file($_FILES["foto"]["tmp_name"], $arquivo_final)) {
+            echo "<script> alert('Ocorreu algum erro.') </script>";
+            exit;
+          }
       }
-  }
-  $sql = "INSERT INTO usuario (nome, genero, telefone, rua, bairro, cidade, uf, numero, data_nasc, complemento, foto, email, username, senha)
-          VALUES ('$nome', '$genero', '$telefone', '$rua', '$bairro','$cidade', '$uf', '$numero','$data_nasc', '$complemento', '$arquivo_final','$email', '$username', '$senha')";
+      $sql = "INSERT INTO usuario (nome, genero, telefone, rua, bairro, cidade, uf, numero, data_nasc, complemento, foto, email, username, senha)
+              VALUES ('$nome', '$genero', '$telefone', '$rua', '$bairro','$cidade', '$uf', '$numero','$data_nasc', '$complemento', '$arquivo_final','$email', '$username', '$senha')";
+    
+    
+    mysqli_query($conn, $sql);
+  }else{
+    $sql = "INSERT INTO usuario (nome, genero, telefone, rua, bairro, cidade, uf, numero, data_nasc, complemento, email, username, senha)
+    VALUES ('$nome', '$genero', '$telefone', '$rua', '$bairro','$cidade', '$uf', '$numero','$data_nasc', '$complemento','$email', '$username', '$senha')";
 
 
 mysqli_query($conn, $sql);
+  }
 
 if (mysqli_affected_rows($conn) > 0) { 
     $sql = "INSERT INTO funcionarios (formacao, matricula_func, data_ingresso, cod_usuario)

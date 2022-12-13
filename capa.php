@@ -24,11 +24,6 @@
         font-family: "Open Sans", sans-serif
     }
 
-    body {
-        background:#f2f2f2;
-
-    }
-
     img {
         width: 110%;
         height: 100%;
@@ -55,7 +50,7 @@
     </style>
 </head>
 
-<body>
+<body class="w3-theme-l5">
 
     <header>
         <div class="">
@@ -72,7 +67,7 @@
                         onclick="openNav()"><i></i></a>
                     <div class="w3-dropdown-hover w3-right w3-margin-right">
                         <a class=" w3-button w3-padding w3-panel w3-border w3-border:16px w3-round-large w3-text-white w3-margin-left"
-                            style="width:140px;" title="Cadastre-se">Cadastre-se</a>
+                            style="width:140px;">Cadastre-se</a>
                         <div class="w3-dropdown-content w3-bar-block w3-transparent w3-center">
                             <a href="TCA_NewSite.php"
                                 class="w3-bar-item w3-button w3-padding w3-border w3 border:16px w3-round-large w3-text-white w3-margin-left"
@@ -83,8 +78,7 @@
                         </div>
                     </div>
                     <a href="Login.php"
-                        class="w3-bar-item w3-button w3-right w3-padding w3-panel w3-border w3 border:16px w3-round-large w3-text-white"
-                        title="Meu Perfil"><i class=></i>Login</a>
+                        class="w3-bar-item w3-button w3-right w3-padding w3-panel w3-border w3 border:16px w3-round-large w3-text-white"><i class=></i>Login</a>
                 </div>
             </div>
         </div>
@@ -94,9 +88,9 @@
         <div class="w3-content w3-container w3-left w3-border w3-white " id="about" style="width:45%; margin-left:80px; margin-top:20px;">
             <h3 class="w3-center">QUEM SOMOS?</h3>
             <p class="w3-center"><em></em></p>
-            <p class="w3-center">A Escola  Municipal Profº Nair Alves Bratti, é uma escola de educação básica fundada em agosto
-                de 1990 e está localizada na cidade de Sombrio-SC, atualmente a instituição de ensino atende crianças e jovens 
-                desde das séries iniciais até o fundamental II dispondo das estruturas básicas necessárias paraformação dos alunos, como 
+            <p class="w3-justify">A Escola  Municipal Profº Nair Alves Bratti, é uma escola de educação básica fundada em agosto
+                de 1990 e está localizada na cidade de Sombrio-SC. Atualmente a instituição de ensino atende crianças e jovens 
+                desde as séries iniciais até o fundamental II, dispondo de estruturas básicas necessárias para a formação dos alunos, como 
             salas, auditório, pátio de lazer, ginásio, refeitório e a Biblioteca Recanto do Saber! 
         Está que dispõe de vários livros e outros documentos, e um espaço para leitura e estudos. Por conseguinte, o programa apresentado
     busca efetivar na biblioteca, um sistema atualizado, de acordo com as tendências tecnológicas atuais, dessa forma, você encontrará aqui

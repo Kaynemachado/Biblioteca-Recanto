@@ -10,23 +10,23 @@ if (isset($_POST['Enviar'])) {
   $titulo =  $_POST['titulo'];
   $autor =  $_POST['autor'];
   $editora =  $_POST['editora'];
-  $sinopse =  $_POST['sinopse'];
   $isbn =  $_POST['isbn'];
-  $faixa_etaria =  $_POST['faixa_etaria'];
+  $serie =  $_POST['serie'];
   $numero_pag =  $_POST['numero_pag'];
   $quant_disponivel =  $_POST['quant_disponivel'];
   $genero_livro =  $_POST['genero_livro'];
+  $cor =  $_POST['cor'];
   $status_livro = $_POST['status_livro'];
   $fonte = $_POST['fonte'];
   $data_lancamento =  $_POST['data_lancamento'];
   $comentarios = $_POST['comentarios'];
   
   $pasta_uploads = "arquivos/";
-    $extensao = strtolower(pathinfo(basename($_FILES["foto"]["name"]),PATHINFO_EXTENSION));
+    $extensao = strtolower(pathinfo(basename($_FILES["foto_livro"]["name"]),PATHINFO_EXTENSION));
     $arquivo_final = $pasta_uploads . time() . $titulo . '.'. $extensao;
     $uploadOk = 1;
   
-    $check = getimagesize($_FILES["foto"]["tmp_name"]);
+    $check = getimagesize($_FILES["foto_livro"]["tmp_name"]);
   
     if($check == false) {
       $uploadOk = 0;
@@ -34,7 +34,7 @@ if (isset($_POST['Enviar'])) {
     if (file_exists($arquivo_final)) {
       $uploadOk = 0;
     }
-    if ($_FILES["foto"]["size"] > 500000) {
+    if ($_FILES["foto_livro"]["size"] > 500000) {
       $uploadOk = 0;
     }
   
@@ -42,7 +42,7 @@ if (isset($_POST['Enviar'])) {
       echo "<script> alert('Ocorreu algum erro.') </script>";
       exit;
     }else{
-      if (!move_uploaded_file($_FILES["foto"]["tmp_name"], $arquivo_final)) {
+      if (!move_uploaded_file($_FILES["foto_livro"]["tmp_name"], $arquivo_final)) {
           echo "<script> alert('Ocorreu algum erro.') </script>";
           exit;
         }
@@ -50,10 +50,10 @@ if (isset($_POST['Enviar'])) {
 
 
 
-  $sql = "INSERT INTO livros (titulo, autor, editora, sinopse, isbn, foto_livro, faixa_etaria, numero_pag, quant_disponivel, genero_livro,
-  status_livro, fonte, data_lancamento, comentarios) 
-          VALUES ('$titulo', '$autor', '$editora', '$sinopse', '$isbn', '$arquivo_final', '$faixa_etaria', '$numero_pag', '$quant_disponivel',
-          '$genero_livro', '$status_livro', '$fonte', '$data_lancamento', '$comentarios')";
+  $sql = "INSERT INTO livros (titulo, autor, editora, isbn, foto_livro, serie, numero_pag, quant_disponivel, genero_livro,
+  cor, status_livro, fonte, data_lancamento, comentarios) 
+          VALUES ('$titulo', '$autor', '$editora', '$isbn', '$arquivo_final', '$serie', '$numero_pag', '$quant_disponivel',
+          '$genero_livro', '$cor','$status_livro', '$fonte', '$data_lancamento', '$comentarios')";
 
   mysqli_query($conn, $sql);
 
@@ -90,7 +90,7 @@ if (isset($_POST['Enviar'])) {
     /* Crie duas colunas desiguais que flutuem uma ao lado da outra */
     /* Coluna Esquerda */
     .colunaesquerda {
-        float: left;
+        float: right;
         width: 75%;
     }
 
@@ -114,7 +114,7 @@ if (isset($_POST['Enviar'])) {
         background-color: white;
         margin-top: 20px;
         padding: 20px;
-        height: 680px;
+        height: 530px;
     }
 
     /* Limpar floats após as colunas */
@@ -193,20 +193,21 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                     <br>
 
                     <div class="form-group">
-                        Faixa Etária:
-                        <input class="form-control" type="number" name="faixa_etaria" size="25">
+                        Série:
+                        <input class="form-control" type="text" name="serie" size="25">
                     </div>
                     <br>
 
                     <div class="form-group">
                         Nº de Páginas:
-                        <input class="form-control" type="text" name="numero_pag" size="22S"/>
-                        <br>
+                        <input class="form-control" type="text" name="numero_pag" size="20"/>
+            
                     </div>
                     <div class="form-group">
                         Nº de exemplares:
-                        <input class="form-control" type="text" name="quant_disponivel" size="20" >
+                        <input class="form-control" type="text" name="quant_disponivel" size="21" >
                     </div>
+                    <br>
                     <div class="form-group">
                         Gênero Textual:
                         <select class="form-control" name="genero_livro">
@@ -233,6 +234,9 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                             <option value="Memorias">Memórias e Autobiografias</option>
                         </select>
                     </div>
+                    <br>
+                    <br>
+                    <br>
 
                     <div class="form-group">
                         Status:
@@ -243,6 +247,10 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                         </select>
                     </div>
                     <br>
+                    <div class="form-group">
+                        Cor:
+                        <input class="form-control" type="color" border-radius=15px; style="width: 90px;" name="cor"/>
+</div>
 
                     <div class="form-group">
                         Fonte:
@@ -257,24 +265,17 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                         Registrado em: <input class="form-control" type="date" name="data_lancamento">
                     </div>
                     <br>
-
+                
+                    <div class="form-group">
+                        <input type="file" placeholder="Importe uma imagem" name="foto_livro" size="200px;">
+</div>
+                    <br>
                     <div class="form-group">
                         Comentários:
-                        <input class="form-control" name="comentarios" type="text" size="40">
+                        <input class="form-control" name="comentarios" type="text" size="106px;">
                     </div>
                     <br>
-
-                    <div class="form-group">
-                        Sinopse:
-                        <textarea class="form-control" name="sinopse" rows="5" cols="80"></textarea>
-                    </div>
                     <br>
-
-                    <div class="form-group">
-                        <input type="file" placeholder="Importe uma imagem" value="foto" name="foto">
-                    </div>
-                    <br>
-
                     <div class="form-group">
                         <input class="w3-button w3-theme-l1" type="submit" value="Enviar" name="Enviar">
                             <input class="w3-button w3-theme-l1" type="reset" value="Limpar tudo">
@@ -298,13 +299,6 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                     <p>- Os empréstimos são realizados semanalmente
                         podendo renovar dependendo da quantidade de páginas que venha ter o livro emprestado.</p>
                     <p>- Caso o exemplar emprestado seja perdido, cobramos um o valor respectivo.</p>
-                </div>
-            </div>
-            <br>
-            <div class="card">
-                <h4>Regulamento da Bilioteca</h4>
-                <div class="fakeimg">
-                    <p>Texto</p>
                 </div>
             </div>
         </div>

@@ -233,7 +233,7 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                     <br>
                     <div class="form-group">
                         UF:
-                        <p><select class="form-control" name="">uf
+                        <p><select class="form-control" name="uf">
                                 <option value="SC">SC</option>
                                 <option value="PR">PR</option>
                                 <option value="RS">RS</option>
@@ -257,9 +257,9 @@ faça os links de navegação empilharem um sobre o outro em vez de um ao lado d
                     <div class="form-group">
                         Turno:
                         <p><select class="form-control" name="turno">
-                                <option value="SC">Vespertino</option>
-                                <option value="PR">Matutino</option>
-                                <option value="RS">Integral</option>
+                                <option value="Vespertino">Vespertino</option>
+                                <option value="Matutino">Matutino</option>
+                                <option value="Integral">Integral</option>
                             </select>
                     </div>
 

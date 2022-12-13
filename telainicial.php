@@ -18,6 +18,8 @@
     include('conexaobanco.php');
     include('pag_logado.php');
 include('menu_simples_aluno.php');
+$sql = "SELECT * FROM emprestimo";
+$emprestimos = mysqli_query($conn, $sql);
 ?>
     <style>
     html,
@@ -53,7 +55,7 @@ include('menu_simples_aluno.php');
                         <br>
                         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i><?= $usuario_logado['nome'] ?></p>
                         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i><?= $usuario_logado['cidade'] ?></p>
-                        <p><i class="fa fa-users fa-fw w3-margin-right w3-text-theme"></i> 3º ano A</p>
+                        <p><i class="fa fa-users fa-fw w3-margin-right w3-text-theme"></i><?= $usuario_logado['email'] ?></p>
                     </div>
                 </div>
                 <br>
@@ -71,27 +73,6 @@ include('menu_simples_aluno.php');
                 </div>
                 <br>
 
-                <!-- Interests -->
-                <div class="w3-card w3-round w3-white w3-hide-small">
-                    <div class="w3-container">
-                        <p>Interesses</p>
-                        <p>
-                            <span class="w3-tag w3-small w3-theme-d5">Romance</span>
-                            <span class="w3-tag w3-small w3-theme-d4">Terror</span>
-                            <span class="w3-tag w3-small w3-theme-d3">Fantasia</span>
-                            <span class="w3-tag w3-small w3-theme-d2">Distopia</span>
-                            <span class="w3-tag w3-small w3-theme-d1">Utopia</span>
-                            <span class="w3-tag w3-small w3-theme">Mangá</span>
-                            <span class="w3-tag w3-small w3-theme-l1">Biografias</span>
-                            <span class="w3-tag w3-small w3-theme-l2">Mistério</span>
-                            <span class="w3-tag w3-small w3-theme-l3">Gibi</span>
-                            <span class="w3-tag w3-small w3-theme-l4">Romance teen</span>
-                            <span class="w3-tag w3-small w3-theme-l5">Quadrinhos</span>
-                        </p>
-                    </div>
-                </div>
-                <br>
-
                 <!-- Alert Box -->
                 <div
                     class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
@@ -100,7 +81,7 @@ include('menu_simples_aluno.php');
                         <i class="fa fa-remove"></i>
                     </span>
                     <p><strong>Avisos</strong></p>
-                    <p>Sua <strong><a href="biblioteca.php">Renovação</a></strong> é dia <strong>25/10/22</strong></p>
+                    <p>Sua <strong>Renovação</a></strong> é dia <strong>22/11</strong></p>
                 </div>
 
                 <!-- End Left Column -->
@@ -127,39 +108,23 @@ include('menu_simples_aluno.php');
       
 
                 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                    <img src="revolucao.png" alt="Avatar" class="w3-left w3-margim-bottom w3-margin-right"
+                    <img src="otelo.jpg" alt="Avatar" class="w3-left w3-margin-bottom w3-margin-right"
                         style="width:130px">
-                    <span class="w3-right w3-opacity">1 min</span>
-                    <h4><?= $livros['cidade'] ?></h4><br>
-                    <p> Por George Orwell</p>
-                    <p class="w3-justify">A Revolução dos Bichos, de George Orwell, se passa numa granja liderada,
-                        inicialmente, pelo Sr. Jones. Porém, insatisfeitos com a dominação e exploração e liderados pelo
-                        Porco Major, os animais decidem fazer uma revolução. Assim, o inimigo seria aquele que anda
-                        sobre duas pernas.</p>
+                    <h4>Otelo</h4><br>
+                    <p>Por William Shakespeare</p>
+                    <p style="text-align: justify;">Em Veneza, Otelo, um general mouro a serviço do Estado, conquista Desdêmona, uma jovem, filha de um nobre local. Após enfrentar a ira do pai e defender-se com sucesso contra a acusação de tê-la "enfeitiçado", ele parte a Chipre em companhia da esposa para combater o inimigo turco?otomano. Lá, seu alferes, o manipulador Iago, consegue paulatinamente instilar na mente do mouro a suspeita de que Desdêmona o traiu. Otelo é a tragédia em que Shakespeare estudou os mecanismos da imaginação, da paixão e do ciúme. Em nova tradução de Lawrence Flores Pereira, que recria a linguagem grandiosa de Otelo e a prosa nefasta de Iago, esta nova edição é acompanhada de uma longa introdução e notas contextuais do tradutor, bem como de um ensaio de W. H. Auden.</p>
                 </div>
 
-                <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                    <img src="mansfild.png" alt="Avatar" class="w3-left w3-margim-bottom w3-margin-right"
-                        style="width:130px">
-                    <span class="w3-right w3-opacity">16 min</span>
-                    <h4>Mansfild Park</h4><br>
-                    <p> Por Jane Austen</p>
-                    <p class="w3-justify">Aos dez anos, Fanny é enviada por seus pais empobrecidos para morar em
-                        Mansfield Park, a propriedade de sir Thomas, o marido rico e nobre de sua tia. A garota cresce
-                        bonita, estudiosa e inteligente, torna-se escritora e, a certa altura, apaixona-se.</p>
-                </div>
 
                 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
                     <img src="ocolecionador.png" alt="Avatar" class="w3-left w3-margin-bottom w3-margin-right"
                         style="width:130px">
-                    <span class="w3-right w3-opacity">32 min</span>
                     <h4>O Colecionador</h4><br>
                     <p>Por John Fowles</p>
-                    <p class="w3-justify">O COLECIONADOR é a história de Frederick Clegg, um homem solitário, de origem
-                        humilde, menosprezado por uma sociedade esnobe, que encontra o grande amor de sua vida. Tudo o
-                        que ele deseja é passar um tempo a sós com ela, demonstrar seus nobres sentimentos e deixar
-                        claro que eles nasceram um para o outro.</p>
+                    <p style="text-align: justify;">O COLECIONADOR é a história de Frederick Clegg, um homem solitário, de origem humilde, menosprezado por uma sociedade esnobe, que encontra o grande amor de sua vida. Tudo o que ele deseja é passar um tempo a sós com ela, demonstrar seus nobres sentimentos e deixar claro que eles nasceram um para o outro.</p>
+
                 </div>
+
 
                 <!-- End Middle Column -->
             </div>

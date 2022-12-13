@@ -52,20 +52,20 @@ img {
   <a class="w3-button w3-padding-large">Usuários</a>
   <div class="w3-dropdown-content w3-card w3-bar-block">
       <a href="lista_usuarios.php" class="w3-bar-item w3-button w3-left">Aluno</a>
-      <a href="lista_funcionarios.php" class="w3-bar-item w3-button w3-left">Funcionário</a>
+      <a href="lista_funcionarios.php" class="w3-bar-item w3-button w3-left">Funcionários</a>
     </div>
   </div>
 
   <div class="w3-dropdown-hover w3-hide-small">
     <a class="w3-button w3-padding-large">Cadastrar</a>    
     <div class="w3-dropdown-content w3-card w3-bar-block">
-      <a href="TCA_NewSite.php" class="w3-bar-item w3-button w3-left">Aluno</a>
-      <a href="Tela_cadastro_prof.php" class="w3-bar-item w3-button w3-left">Funcionário</a>
+      <a href="TCA_NewSite.php" class="w3-bar-item w3-button w3-left">Alunos</a>
+      <a href="Tela_cadastro_prof.php" class="w3-bar-item w3-button w3-left">Funcionários</a>
       <a href="newsite.php" class="w3-bar-item w3-button w3-left">Livros</a>
     </div>
   </div>
   <a href="lista_emprestimos.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Empréstimos</a>
-
+<a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"><i class="bi bi-search"></i></a>
   <?php
   if(isset($usuario_logado)){?>
   <a href="Logout.php" class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white"><i></i>Sair</a>

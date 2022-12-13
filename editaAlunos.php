@@ -2,9 +2,9 @@
 <?php
 include('conexaobanco.php');
 
-$codigo = $_GET['cod_aluno'];
+$cod_aluno = $_POST['cod_aluno'];
 
-if (isset($_POST['Enviar'])) {
+if (isset($_POST['Salvar'])) {
     $nome = $_POST['nome']; //Envia dados do formulário - campo nome
     $genero = $_POST['genero'];
     $telefone = $_POST['telefone'];
@@ -21,40 +21,89 @@ if (isset($_POST['Enviar'])) {
     $regente = $_POST['regente'];
     $turma = $_POST['turma'];
     $matricula_aluno = $_POST['matricula_aluno'];
-    $username = $_POST['username'];
-    $senha = $_POST['senha'];
+    $nochange = $_POST['nochange'];
 
-    $sql = "UPDATE livros SET /*Alunos ou Usuários*/
-                nome='$nome', 
-                genero='$genero', 
-                telefone='$telefone',
-                rua='$rua',
-                bairro='$bairro',
-                cidade='$cidade',
-                uf='$uf',
-                numero='$numero',
-                data_nasc='$data_nasc',
-                complemento='$complemento',
-                cpf='$cpf',
-                email='$email',
-                turno='$turno',
-                regente='$regente'
-                turma='$turma',
-                matricula_aluno='$matricula_aluno',
-                username='$username',
-                senha='$senha'
-            WHERE cod_livro='$cod_livro'"; /*Alunos ou Usuários*/
+    $sql = "UPDATE alunos SET 
+                turno='$turno', 
+                turma='$turma', 
+                regente='$regente',
+                matricula_aluno='$matricula_aluno'
+            WHERE cod_aluno='$cod_aluno'";
+    mysqli_query($conn, $sql);
+
+    if ($nochange == 'false') {
+        $pasta_uploads = "arquivos/";
+        $extensao = strtolower(pathinfo(basename($_FILES["foto"]["name"]), PATHINFO_EXTENSION));
+        $arquivo_final = $pasta_uploads . time() . $username . '.' . $extensao;
+        $uploadOk = 1;
+
+        $check = getimagesize($_FILES["foto"]["tmp_name"]);
+
+        if ($check == false) {
+            $uploadOk = 0;
+        }
+        if (file_exists($arquivo_final)) {
+            $uploadOk = 0;
+        }
+        if ($_FILES["foto"]["size"] > 500000) {
+            $uploadOk = 0;
+        }
+
+        if ($uploadOk == 0) {
+            echo "<script> alert('Ocorreu algum erro.') </script>";
+            // header("Location: lista_usuarios.php");
+            exit;
+        } else {
+            if (!move_uploaded_file($_FILES["foto"]["tmp_name"], $arquivo_final)) {
+                // header("Location: lista_usuarios.php");
+                echo "<script> alert('Ocorreu algum erro.') </script>";
+                exit;
+            }else{
+                unlink($_POST['old']);
+            }
+        }
+        $sql = "UPDATE usuario SET 
+        nome='$nome', 
+        genero='$genero', 
+        telefone='$telefone',
+        rua='$rua',
+        bairro='$bairro', 
+        cidade='$cidade', 
+        uf='$uf',
+        numero='$numero',
+        data_nasc='$data_nasc', 
+        complemento='$complemento', 
+        cpf='$cpf',
+        email='$email',
+        foto='$arquivo_final'
+        WHERE cod_usuario=(select cod_usuario from alunos where cod_aluno = '$cod_aluno')";
+        echo 'sad\assf'; 
+    }else{
+        $sql = "UPDATE usuario SET 
+        nome='$nome', 
+        genero='$genero', 
+        telefone='$telefone',
+        rua='$rua',
+        bairro='$bairro', 
+        cidade='$cidade', 
+        uf='$uf',
+        numero='$numero',
+        data_nasc='$data_nasc', 
+        complemento='$complemento', 
+        cpf='$cpf',
+        email='$email'
+        WHERE cod_usuario=(select cod_usuario from alunos where cod_aluno = '$cod_aluno')"; /*Alunos ou Usuários*/
+        echo 'sad\9468038yw'; 
+    }
 
     mysqli_query($conn, $sql);
 
     if (mysqli_affected_rows($conn) > 0) {
         echo "<script> alert('Usuário alterado com sucesso.') </script>";
-        header("Location: listaUsuarios.php");
+        header("Location: lista_usuarios.php");
     } else {
         echo "<script> alert('Ocorreu algum erro.') </script>";
+        header("Location: lista_usuarios.php");
     }
 }
-$sql = "SELECT * FROM livros WHERE cod_livro=$cod_livro"; /*Alterar aqui também*/
-$rs = mysqli_query($conn, $sql);
-$linha = mysqli_fetch_array($rs);
 ?>

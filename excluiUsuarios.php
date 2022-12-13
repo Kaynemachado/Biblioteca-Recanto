@@ -2,13 +2,12 @@
 
 include('conexaobanco.php');
 
-$codigo = $_GET['cod_livro'];
-
-$sql = "DELETE FROM livros WHERE cod_livro=$codigo";
+$codigo = $_GET['cod_aluno'];
+$sql = "DELETE FROM usuario WHERE cod_usuario=$codigo";
 
 mysqli_query($conn, $sql);
 if (mysqli_affected_rows($conn) > 0) {
-    header("Location: lista_livros.php");
+    header("Location: lista_usuarios.php");
 } else {
     echo "<script>alert('Houve algum erro.');</script>";
     mysqli_error($conn);
